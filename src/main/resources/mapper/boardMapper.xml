@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardMapper">
+    <insert id="insertBoard" parameterType="org.example.chuchuping2.vo.BoardVO">
+        INSERT INTO board (title, content, user_id, character_id, created_at, updated_at, views)
+        VALUES (#{title}, #{content}, #{userId}, #{characterId}, #{createdAt}, #{updatedAt}, #{views})
+    </insert>
+</mapper>

@@ -19,6 +19,8 @@
 
     <!-- 정적 리소스 핸들링 (CSS, JS, 이미지) -->
     <mvc:resources mapping="/resources/**" location="/resources/" />
+    <mvc:resources mapping="/images/**" location="/images/" />
+
 
     <!-- JSP ViewResolver 설정 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

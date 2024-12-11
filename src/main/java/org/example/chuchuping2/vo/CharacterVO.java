@@ -6,14 +6,14 @@ public class CharacterVO {
 
     private Long id;
     private String imageUrl;
-    private String characterName;
+    private String name;
 
-    public CharacterVO(Long id, String imageUrl, String characterName) {
+
+    public CharacterVO(Long id, String imageUrl, String name) {
         this.id = id;
         this.imageUrl = imageUrl;
-        this.characterName = characterName;
+        this.name = name;
     }
-
 
     public Long getId() {
         return id;
@@ -31,11 +31,11 @@ public class CharacterVO {
         this.imageUrl = imageUrl;
     }
 
-    public String getCharacterName() {
-        return characterName;
+    public String getName() {
+        return name;
     }
 
-    public void setCharacterName(String characterName) {
-        this.characterName = characterName;
+    public void setName(String name) {
+        this.name = name;
     }
 }

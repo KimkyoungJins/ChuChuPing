@@ -12,7 +12,7 @@
            https://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- 컴포넌트 스캔: Service, Repository 패키지 등 -->
-    <context:component-scan base-package="org.example.chuchuping2.service, org.example.chuchuping2.dao" />
+    <context:component-scan base-package="org.example.chuchuping2.controller, org.example.chuchuping2.service, org.example.chuchuping2.dao, org.example.chuchuping2.vo"/>
 
     <!-- DataSource 설정 (예: DriverManagerDataSource 또는 Commons DBCP2) -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -30,6 +30,13 @@
         <!-- MyBatis 설정 파일 필요시 -->
         <!-- <property name="configLocation" value="classpath:mybatis-config.xml"/> -->
     </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.example.chuchuping2.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+
 
     <!-- MyBatis SqlSessionTemplate -->
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
