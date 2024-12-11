@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 데이터 소스 설정 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
+        <property name="url" value="jdbc:mariadb://walab.handong.edu:3306/OSS24_21900066"/>
+        <property name="username" value="OSS24_21900066"/>
+        <property name="password" value="Cheu1Uo7"/>
+    </bean>
+
+    <!-- 트랜잭션 관리자 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- MyBatis SqlSessionFactory 설정 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- mapper.xml은 src/main/resources/mapper 디렉토리에 위치 -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+
+    <!-- MyBatis Mapper Scanner 사용하지 않고, DAO를 통해 접근하거나
+         Mapper 인터페이스를 사용하지 않을 경우 아래는 제거하거나 필요시 유지 -->
+    <!-- 만약 Mapper 인터페이스 없이 DAO만 사용할 경우 이 설정 제거 가능 -->
+    <!--
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.example.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+    -->
+
+    <!-- 컴포넌트 스캔 (서비스, DAO 등) -->
+    <!-- service 패키지와 dao 패키지를 모두 스캔 -->
+    <context:component-scan base-package="org.example.chuchuping.service"/>
+    <context:component-scan base-package="org.example.chuchuping.dao"/>
+
+</beans>
