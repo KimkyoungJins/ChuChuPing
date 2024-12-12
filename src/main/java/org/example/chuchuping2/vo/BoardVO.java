@@ -13,8 +13,11 @@ public class BoardVO {
     private java.util.Date createdAt;   // 만든 시간
     private java.util.Date updatedAt;   // 업데이트 시간
     private Integer views;              // 조회수
+    private String userName;            // 유저 이름
+    private String characterImage;      // 캐릭터 이미지 URL
 
-    public BoardVO(Long id, String title, String content, Long userId, Long characterId, Date createdAt, Date updatedAt, Integer views) {
+
+    public BoardVO(Long id, String title, String content, Long userId, Long characterId, Date createdAt, Date updatedAt, Integer views, String userName, String characterImage) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -23,9 +26,10 @@ public class BoardVO {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.views = views;
+        this.userName = userName;
+        this.characterImage = characterImage;
     }
 
-    // 생성자
     public BoardVO() {
 
     }
@@ -93,6 +97,20 @@ public class BoardVO {
     public void setViews(Integer views) {
         this.views = views;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getCharacterImage() {
+        return characterImage;
+    }
+
+    public void setCharacterImage(String characterImage) {
+        this.characterImage = characterImage;
+    }
 }
-
-

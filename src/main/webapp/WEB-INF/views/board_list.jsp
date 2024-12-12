@@ -6,93 +6,212 @@
     <meta charset="UTF-8">
     <title>게시물 리스트</title>
     <style>
+        /* 기본 스타일 */
         body {
-            background-color: pink;
-            font-family: Arial, sans-serif;
+            background-color: #ffe6f0; /* 더 연한 분홍색 배경 */
+            font-family: 'Noto Sans KR', Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
+
+        /* 헤더 스타일 */
         .header {
-            background-color: #e67c97; /* 연한 분홍색 배경 */
-            padding: 20px 0;
+            background-color: #ff99cc; /* 밝은 분홍색 배경 */
+            padding: 30px 0;
             text-align: center;
-            /* border-bottom: 2px solid #ff69b4; */ /* 줄 제거 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         .header h1 {
             margin: 0;
-            color: white;
-            font-size: 36px;
+            color: #fff;
+            font-size: 48px;
+            letter-spacing: 2px;
         }
+
+        /* 컨테이너 스타일 */
         .container {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            padding: 20px;
+            padding: 40px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
+
+        /* 게시물 리스트 섹션 */
         .board-section {
             width: 70%;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
-        .character-section {
-            width: 25%;
-            text-align: center;
-            background-color: #ffe6f7;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        h2 {
-            color: #99004c;
+
+        .board-section h2 {
+            color: #ff6699;
             margin-bottom: 20px;
+            font-size: 32px;
+            border-bottom: 2px solid #ff99cc;
+            padding-bottom: 10px;
         }
+
+        /* 게시물 생성 버튼 */
         .create-button {
             text-align: right;
             margin-bottom: 20px;
         }
+
         .create-button a {
             display: inline-block;
-            padding: 10px 20px;
+            padding: 12px 25px;
             background-color: #ff6699;
             color: white;
             text-decoration: none;
             font-weight: bold;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            border-radius: 25px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         .create-button a:hover {
             background-color: #ff3366;
+            transform: translateY(-2px);
         }
+
+        /* 테이블 스타일 */
         table {
             width: 100%;
             border-collapse: collapse;
             background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
         }
+
         th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
+            padding: 15px 20px;
             text-align: center;
-            color: #333;
+            color: #555;
+            border-bottom: 1px solid #f2f2f2;
         }
+
+        th {
+            background-color: #ff99cc;
+            color: white;
+            font-size: 18px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f2f7;
+        }
+
+        tr:hover {
+            background-color: #ffe6f0;
+        }
+
+        /* 캐릭터 이미지 스타일 */
         img.board-character {
             width: 80px;
             height: auto;
             margin: 10px 0;
-            border: 3px solid #ffe6f2;
+            border: 3px solid #ff99cc;
             border-radius: 10px;
+            transition: transform 0.3s;
         }
+
+        img.board-character:hover {
+            transform: scale(1.05);
+        }
+
         img.character-image {
             width: 100px;
             height: auto;
-            border: 3px solid #ffe6f2;
+            border: 3px solid #ff99cc;
             border-radius: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
         }
+
+        img.character-image:hover {
+            transform: scale(1.1);
+        }
+
+        /* 액션 버튼 스타일 */
         .action-buttons {
             display: flex;
             justify-content: center;
             gap: 10px;
         }
+
         .action-buttons form {
             display: inline;
             margin: 0;
+        }
+
+        .action-buttons button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .action-buttons .edit-btn {
+            background-color: #66cc99;
+        }
+
+        .action-buttons .edit-btn:hover {
+            background-color: #339966;
+            transform: translateY(-2px);
+        }
+
+        .action-buttons .delete-btn {
+            background-color: #ff6666;
+        }
+
+        .action-buttons .delete-btn:hover {
+            background-color: #cc0000;
+            transform: translateY(-2px);
+        }
+
+        /* 버튼 아이콘 */
+        .action-buttons button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* 캐릭터 섹션 스타일 */
+        .character-section {
+            width: 25%;
+            text-align: center;
+            background-color: #ffe6f7;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .character-section h2 {
+            color: #ff6699;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .board-section, .character-section {
+                width: 100%;
+                margin-bottom: 20px;
+            }
         }
     </style>
     <script>
@@ -140,12 +259,24 @@
                         <!-- 삭제 기능 -->
                         <form action="${pageContext.request.contextPath}/deleteBoard" method="post" onsubmit="return confirmDelete();">
                             <input type="hidden" name="boardId" value="${board.id}"/>
-                            <button type="submit">삭제</button>
+                            <button type="submit" class="delete-btn">
+                                <!-- 삭제 아이콘 -->
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                                삭제
+                            </button>
                         </form>
-                        <!-- 수정 기능 (추후 구현) -->
+                        <!-- 수정 기능 -->
                         <form action="${pageContext.request.contextPath}/editBoard" method="get">
                             <input type="hidden" name="boardId" value="${board.id}"/>
-                            <button type="submit">수정</button>
+                            <button type="submit" class="edit-btn">
+                                <!-- 수정 아이콘 -->
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-9 4l9-9"/>
+                                </svg>
+                                수정
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -156,7 +287,7 @@
 
     <!-- 캐릭터 이미지 섹션 -->
     <div class="character-section">
-        <h2>뀨?</h2>
+        <h2>티니핑들</h2>
         <img class="character-image" src="${pageContext.request.contextPath}/images/HACHUPING.png" alt="하츄핑"/>
         <img class="character-image" src="${pageContext.request.contextPath}/images/LALAPING.png" alt="라라핑"/>
         <img class="character-image" src="${pageContext.request.contextPath}/images/POSHILPING.png" alt="포실핑"/>
