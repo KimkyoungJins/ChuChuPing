@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 // CRUD 기능 추가하기
@@ -35,7 +37,15 @@ public class BoardController {
 
     // 게시물을 생성하는 창에서 캐릭터 데이터를 불러오는 역할을 한다.
     @GetMapping("/createBoard")
-    public String createBoardForm(Model model) {
+    public String createBoardForm(Model model, HttpSession httpSession) {
+
+        // 로그인 확인
+        Long userId = (Long) httpSession.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/login";
+        }
+
+
         List<CharacterVO> characters = characterService.getAllCharacters();
         model.addAttribute("characters", characters);
         return "board_create";
@@ -52,11 +62,20 @@ public class BoardController {
             @RequestParam String title,
             @RequestParam String content,
             @RequestParam Long character_id,
-            @RequestParam Long userId // 실제로는 로그인된 유저 세션에서 가져옴
+            HttpSession httpSession
     ) {
+
+        // 로그인 확인
+        Long userId = (Long) httpSession.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/login";
+        }
 
         boardService.createBoard(title, content, userId, character_id);
         return "redirect:/boards"; // 게시물 목록 페이지로 리다이렉트
     }
+
+
+
 
 }
