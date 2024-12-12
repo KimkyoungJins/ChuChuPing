@@ -2,7 +2,6 @@ package org.example.chuchuping2.dao;
 
 import org.example.chuchuping2.mapper.CharacterMapper;
 import org.example.chuchuping2.vo.CharacterVO;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

@@ -2,6 +2,7 @@ package org.example.chuchuping2.controller;
 
 import org.example.chuchuping2.service.BoardService;
 import org.example.chuchuping2.service.CharacterService;
+import org.example.chuchuping2.vo.BoardVO;
 import org.example.chuchuping2.vo.CharacterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,15 @@ public class BoardController {
 
     @Autowired
     private CharacterService characterService;
+
+    // 메인 페이지, 게시판을 가져온다.
+    @GetMapping("/boards")
+    public String boardList(Model model) {
+        // 보드 리스트를 만든다.
+        List<BoardVO> boards = boardService.getAllBoards();
+        model.addAttribute("boards", boards);
+        return "board_list";
+    }
 
     // 게시물을 생성하는 창에서 캐릭터 데이터를 불러오는 역할을 한다.
     @GetMapping("/createBoard")
@@ -46,7 +56,5 @@ public class BoardController {
         boardService.createBoard(title, content, userId, character_id);
         return "redirect:/boards"; // 게시물 목록 페이지로 리다이렉트
     }
-
-
 
 }
