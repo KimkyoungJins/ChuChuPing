@@ -23,6 +23,7 @@ public class BoardController {
     private CharacterService characterService;
 
     // 메인 페이지, 게시판을 가져온다.
+    // 게시판을 가져올 뿐안 아니라 캐릭터들을 보여주기도 해야한다.
     @GetMapping("/boards")
     public String boardList(Model model) {
         // 보드 리스트를 만든다.
@@ -30,6 +31,7 @@ public class BoardController {
         model.addAttribute("boards", boards);
         return "board_list";
     }
+
 
     // 게시물을 생성하는 창에서 캐릭터 데이터를 불러오는 역할을 한다.
     @GetMapping("/createBoard")
