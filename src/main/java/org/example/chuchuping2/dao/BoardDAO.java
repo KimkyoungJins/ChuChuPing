@@ -18,7 +18,7 @@ public class BoardDAO {
     private BoardMapper boardMapper;    // 보드 매퍼를 담당하는 클래스 하나 만듦.
     // 이렇게 하면 좀 더 좋다고 하더라
     // 좀더 깔끔쓰
-    private static final String NAMESPACE = "BoardMapper";
+    private static final String NAMESPACE = "org.example.chuchuping2.mapper.BoardMapper";
 
     // mapper와 직접적인 통신을 이루어 낸다.
     public void insertBoard(BoardVO boardVO) {
