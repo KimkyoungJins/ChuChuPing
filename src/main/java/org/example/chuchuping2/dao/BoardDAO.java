@@ -9,12 +9,15 @@ import org.springframework.stereotype.Repository;
 public class BoardDAO {
 
     @Autowired
-    private SqlSessionTemplate sqlSession;
+    private SqlSessionTemplate sqlSession;  // mybatis에서 직접적으로 제공하는 클래스
 
-    // board.xml에 정의된 namespace와 id를 사용
+    // 이렇게 하면 좀 더 좋다고 하더라
+    // 좀더 깔끔쓰
     private static final String NAMESPACE = "BoardMapper";
 
+    // mapper와 직접적인 통신을 이루어 낸다.
     public void insertBoard(BoardVO boardVO) {
         sqlSession.insert(NAMESPACE + ".insertBoard", boardVO);
     }
+
 }

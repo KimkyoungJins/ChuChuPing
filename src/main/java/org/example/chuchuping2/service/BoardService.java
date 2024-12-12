@@ -14,8 +14,8 @@ public class BoardService {
     @Autowired
     private BoardDAO boardDAO;
 
-
     // 보드를 만드는 로직이다.
+    // boardVO에서 set 로직을 사용한다.
     public void createBoard(String title, String content, Long userId, Long characterId) {
         BoardVO boardVO = new BoardVO();
         boardVO.setTitle(title);
@@ -27,5 +27,4 @@ public class BoardService {
         boardVO.setViews(0);
         boardDAO.insertBoard(boardVO);
     }
-
 }

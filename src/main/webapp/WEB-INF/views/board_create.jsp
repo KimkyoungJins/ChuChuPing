@@ -149,7 +149,7 @@
             </c:forEach>
         </div>
         <div class="character-info">
-            캐릭터를 클릭하여 선택하세요.
+            캐릭터를 클릭하여 선택하세용.
         </div>
     </div>
 
