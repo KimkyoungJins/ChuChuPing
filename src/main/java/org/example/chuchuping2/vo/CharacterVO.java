@@ -3,7 +3,6 @@ package org.example.chuchuping2.vo;
 // 캐릭터 테이블 구조
 public class CharacterVO {
 
-
     private Long id;
     private String imageUrl;
     private String name;
