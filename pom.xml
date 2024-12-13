@@ -16,8 +16,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Java 8 사용 -->
-        <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.release>8</maven.compiler.release>
 
         <!-- Spring 5.x 사용 (Java EE 기반) -->
         <spring.version>5.3.30</spring.version>
@@ -74,14 +75,12 @@
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.5.6</version>
+            <version>3.5.11</version>
         </dependency>
-
-        <!-- MyBatis-Spring -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
-            <version>2.0.6</version>
+            <version>3.0.0</version>
         </dependency>
 
         <!-- MariaDB JDBC Driver -->
@@ -100,9 +99,8 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.11</version>
+            <version>1.2.11</version> <!-- 1.2.x 버전으로 변경 -->
         </dependency>
-
         <!-- JUnit 5 (테스트) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -124,10 +122,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
+                <version>3.8.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>1.8</source> <!-- Java 소스 코드 버전 -->
+                    <target>1.8</target> <!-- Java 바이트코드 버전 -->
+                    <release>8</release> <!-- Java API 버전 -->
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>

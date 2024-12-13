@@ -58,6 +58,52 @@ public class BoardController {
 
 
 
+    @PostMapping("/deleteBoard")
+    public String deleteBoard(@RequestParam("boardId") int boardId, HttpSession session) {
+        // 로그인 확인 (선택)
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/login";
+        }
+
+        boardService.deleteBoard(boardId);
+        return "redirect:/boards";
+    }
+
+    @GetMapping("/editBoard")
+    public String editBoardForm(@RequestParam("boardId") Long boardId, Model model, HttpSession session) {
+        // 로그인 확인 (선택)
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/login";
+        }
+
+        BoardVO board = boardService.getBoardById(boardId);
+        if (board == null) {
+            model.addAttribute("errorMessage", "해당 게시물이 존재하지 않습니다.");
+            return "error";
+        }
+
+        model.addAttribute("board", board);
+        return "board_edit"; // board_edit.jsp로 포워드
+    }
+
+    @PostMapping("/editBoard")
+    public String editBoard(
+            @RequestParam("boardId") Long boardId,
+            @RequestParam("title") String title,
+            @RequestParam("content") String content,
+            HttpSession session) {
+        // 로그인 확인 (선택)
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/login";
+        }
+
+        boardService.updateBoard(boardId, title, content);
+        return "redirect:/boardDetail?boardId=" + boardId;
+    }
+
 
 
     // 게시물을 생성하는 창에서 캐릭터 데이터를 불러오는 역할을 한다.

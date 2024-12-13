@@ -46,8 +46,19 @@
         VALUES (#{title}, #{content}, #{userId}, #{characterId}, #{createdAt}, #{updatedAt}, #{views})
     </insert>
 
-<!--    &lt;!&ndash; 게시물 삭제 &ndash;&gt;-->
-<!--    <delete id="deleteBoard">-->
-<!--        DELETE FROM board WHERE id = #{boardId}-->
-<!--    </delete>-->
+
+    <!-- 게시물 수정 매핑 -->
+    <update id="updateBoard" parameterType="org.example.chuchuping2.vo.BoardVO">
+        UPDATE board
+        SET title = #{title},
+            content = #{content},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+
+    <!-- 게시물 삭제 -->
+    <delete id="deleteBoard">
+        DELETE FROM board WHERE id = #{boardId}
+    </delete>
 </mapper>

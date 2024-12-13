@@ -27,4 +27,13 @@ public class BoardDAO {
     public BoardVO selectBoardById(Long boardId) {
         return boardMapper.selectBoardById(boardId);
     }
+
+
+    public int deleteBoard(int boardId) {
+        return boardMapper.deleteBoard(boardId);
+    }
+
+    public int updateBoard(BoardVO boardVO) {
+        return boardMapper.updateBoard(boardVO);
+    }
 }

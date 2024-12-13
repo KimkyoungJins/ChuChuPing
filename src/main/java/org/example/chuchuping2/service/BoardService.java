@@ -42,5 +42,23 @@ public class BoardService {
 
 
 
+    public void deleteBoard(int boardId) {
+        boardDAO.deleteBoard(boardId);
+    }
+
+    public void updateBoard(Long boardId, String title, String content) {
+        // 수정할 게시물 객체 생성
+        BoardVO boardVO = boardDAO.selectBoardById(boardId);
+        if (boardVO == null) {
+            throw new RuntimeException("해당 게시물이 존재하지 않습니다.");
+        }
+
+        boardVO.setTitle(title);
+        boardVO.setContent(content);
+        boardVO.setUpdatedAt(new Date());
+
+        boardDAO.updateBoard(boardVO);
+    }
+
 
 }
