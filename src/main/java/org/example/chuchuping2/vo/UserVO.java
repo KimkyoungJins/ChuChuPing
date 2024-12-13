@@ -13,6 +13,10 @@ public class UserVO {
         this.password = password;
     }
 
+    public UserVO() {
+
+    }
+
     public Long getId() {
         return id;
     }
