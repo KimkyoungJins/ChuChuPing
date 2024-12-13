@@ -22,6 +22,24 @@
         ORDER BY b.created_at DESC
     </select>
 
+<!--    게시물 상세보기-->
+    <select id="selectBoardById" parameterType="long" resultType="org.example.chuchuping2.vo.BoardVO">
+        SELECT b.id,
+               b.title,
+               b.content,
+               b.user_id AS userId,
+               b.character_id AS characterId,
+               b.created_at AS createdAt,
+               b.updated_at AS updatedAt,
+               b.views,
+               u.name AS userName,
+               c.image_url AS characterImage
+        FROM board b
+                 JOIN user u ON b.user_id = u.id
+                 JOIN characters c ON b.character_id = c.id
+        WHERE b.id = #{boardId}
+    </select>
+
     <!-- 게시물 삽입 -->
     <insert id="insertBoard" parameterType="org.example.chuchuping2.vo.BoardVO">
         INSERT INTO board (title, content, user_id, character_id, created_at, updated_at, views)

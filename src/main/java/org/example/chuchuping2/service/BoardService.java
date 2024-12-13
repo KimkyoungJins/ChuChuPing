@@ -36,6 +36,11 @@ public class BoardService {
     }
 
 
+    public BoardVO getBoardById(Long boardId) {
+        return boardDAO.selectBoardById(boardId);
+    }
+
+
 
 
 }

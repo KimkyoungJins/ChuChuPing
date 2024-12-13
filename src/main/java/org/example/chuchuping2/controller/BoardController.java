@@ -34,6 +34,31 @@ public class BoardController {
     }
 
 
+    // 게시물 상세보기 페이지
+    // 게시물의 아이디를 가져와야 한다.
+    @GetMapping("/boardDetail")
+    public String boardDetail(@RequestParam Long boardId, Model model, HttpSession session) {
+
+        // 로그인 확인 (선택사항)
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/login";
+        }
+
+        BoardVO board = boardService.getBoardById(boardId);
+        if (board == null) {
+            // 게시물이 없을 경우 처리 (예: 에러 페이지로 이동)
+            model.addAttribute("error", "해당 게시물이 존재하지 않습니다.");
+            return "error";
+        }
+
+        model.addAttribute("board", board);
+        return "board_detail"; // board_detail.jsp로 포워드
+    }
+
+
+
+
 
     // 게시물을 생성하는 창에서 캐릭터 데이터를 불러오는 역할을 한다.
     @GetMapping("/createBoard")

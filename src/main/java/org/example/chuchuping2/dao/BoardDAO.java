@@ -23,4 +23,8 @@ public class BoardDAO {
     public List<BoardVO> selectAllBoards() {
         return boardMapper.selectBoardList();
     }
+
+    public BoardVO selectBoardById(Long boardId) {
+        return boardMapper.selectBoardById(boardId);
+    }
 }
