@@ -252,6 +252,8 @@
                     <td>
                         <img class="board-character" src="${pageContext.request.contextPath}${board.characterImage}" alt="캐릭터 이미지"/>
                     </td>
+
+
                     <td>
                         <a href="${pageContext.request.contextPath}/boardDetail?boardId=${board.id}">${board.title}</a>
                     </td>

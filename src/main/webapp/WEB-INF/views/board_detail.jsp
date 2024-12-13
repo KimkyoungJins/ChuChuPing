@@ -114,7 +114,7 @@
   <!-- 왼쪽 캐릭터 이미지 섹션 -->
   <div class="character-section">
     <h2>내 티니핑</h2>
-    <img src="${pageContext.request.contextPath}/images/${board.characterImage}" alt="캐릭터 이미지"/>
+    <img src="${pageContext.request.contextPath}${board.characterImage}" alt="캐릭터 이미지"/>
   </div>
 
   <!-- 게시물 상세 정보 섹션 -->
@@ -139,7 +139,7 @@
   <!-- 오른쪽 캐릭터 이미지 섹션 -->
   <div class="character-section">
     <h2>내 티니핑</h2>
-    <img src="${pageContext.request.contextPath}/images/${board.characterImage}" alt="캐릭터 이미지"/>
+    <img src="${pageContext.request.contextPath}${board.characterImage}" alt="캐릭터 이미지"/>
   </div>
 </div>
 </body>
