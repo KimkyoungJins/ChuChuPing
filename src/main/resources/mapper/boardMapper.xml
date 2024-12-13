@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.chuchuping2.mapper.BoardMapper">
+    <!-- 게시물 리스트 조회 -->
+    <select id="selectBoardList" resultType="org.example.chuchuping2.vo.BoardVO">
+        SELECT b.id,
+               b.title,
+               b.content,
+               b.user_id AS userId,
+               b.character_id AS characterId,
+               b.created_at AS createdAt,
+               b.updated_at AS updatedAt,
+               b.views,
+               u.name AS userName,
+               c.image_url AS characterImage
+        FROM board b
+                 JOIN user u ON b.user_id = u.id
+                 JOIN characters c ON b.character_id = c.id
+        ORDER BY b.created_at DESC
+    </select>
+
+<!--    게시물 상세보기-->
+    <select id="selectBoardById" parameterType="long" resultType="org.example.chuchuping2.vo.BoardVO">
+        SELECT b.id,
+               b.title,
+               b.content,
+               b.user_id AS userId,
+               b.character_id AS characterId,
+               b.created_at AS createdAt,
+               b.updated_at AS updatedAt,
+               b.views,
+               u.name AS userName,
+               c.image_url AS characterImage
+        FROM board b
+                 JOIN user u ON b.user_id = u.id
+                 JOIN characters c ON b.character_id = c.id
+        WHERE b.id = #{boardId}
+    </select>
+
+    <!-- 게시물 삽입 -->
+    <insert id="insertBoard" parameterType="org.example.chuchuping2.vo.BoardVO">
+        INSERT INTO board (title, content, user_id, character_id, created_at, updated_at, views)
+        VALUES (#{title}, #{content}, #{userId}, #{characterId}, #{createdAt}, #{updatedAt}, #{views})
+    </insert>
+
+
+    <!-- 게시물 수정 매핑 -->
+    <update id="updateBoard" parameterType="org.example.chuchuping2.vo.BoardVO">
+        UPDATE board
+        SET title = #{title},
+            content = #{content},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+
+    <!-- 게시물 삭제 -->
+    <delete id="deleteBoard">
+        DELETE FROM board WHERE id = #{boardId}
+    </delete>
+
+    <select id="searchBoards" resultType="org.example.chuchuping2.vo.BoardVO">
+        SELECT b.id,
+               b.title,
+               b.content,
+               b.user_id AS userId,
+               b.character_id AS characterId,
+               b.created_at AS createdAt,
+               b.updated_at AS updatedAt,
+               b.views,
+               u.name AS userName,
+               c.image_url AS characterImage
+        FROM board b
+                 JOIN user u ON b.user_id = u.id
+                 JOIN characters c ON b.character_id = c.id
+        WHERE b.title LIKE CONCAT('%', #{query}, '%')
+           OR b.content LIKE CONCAT('%', #{query}, '%')
+        ORDER BY b.created_at DESC
+    </select>
+
+    <update id="updateViewCount">
+        UPDATE board
+        SET views = views + 1
+        WHERE id = #{boardId}
+    </update>
+
+</mapper>

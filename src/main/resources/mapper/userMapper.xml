@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.chuchuping2.mapper.UserMapper">
+
+    <!-- 유저 정보를 삽입 -->
+    <insert id="insertUser" parameterType="org.example.chuchuping2.vo.UserVO">
+        INSERT INTO user (name, password)
+        VALUES (#{name}, #{password})
+    </insert>
+
+    <!-- findByName 매핑 -->
+    <select id="findByName" parameterType="String" resultType="org.example.chuchuping2.vo.UserVO">
+        SELECT * FROM user WHERE name = #{name}
+    </select>
+
+</mapper>
